@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Run FastAPI app with PYTHONPATH",
+			"command": "$env:PYTHONPATH=\"e:/own/demo1/backend\"; uvicorn app.main:app --reload",
+			"group": "build"
+		}
+	]
+}

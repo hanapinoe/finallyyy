@@ -50,7 +50,8 @@ class UserService:
         updater = update_db_service(
             db, "Users", {"userID": userID}, {"avatarPath": img_url}
         )
-        updater.update()
+        # Fix: Call update with required arguments (doc_name, subcollection_name)
+        updater.update(userID, "")
         user.avatarPath = img_url
         return user
 

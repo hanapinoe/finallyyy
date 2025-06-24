@@ -1,11 +1,12 @@
 from pydantic import BaseModel
+from typing import Optional
 
-# Outfit model representing clothing items
+
 class Outfit(BaseModel):
     outfitID: str
     name: str
     type: str
     style: str
-    imgPathLocal: str
-    imgPathStorage: str
-    history: bool
+    imgPathStorage: (
+        str  # Để đúng với luồng upload ảnh, luôn là str (URL), không Optional)
+    )

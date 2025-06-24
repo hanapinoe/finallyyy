@@ -19,3 +19,7 @@ class PremiumUser(User):
     startdate: str
     enddate: str
     status: str
+
+class UserOutfitImage(User):
+    imagePathLocal: str
+    imagePathStorage: str

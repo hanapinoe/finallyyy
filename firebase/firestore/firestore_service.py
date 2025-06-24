@@ -31,16 +31,24 @@ class firestore_service(firestore_initialize):
             print(f"Error: {e}")
             return False
 
-    def search_db(self, search_option, collection_input, field_input=None):
+    def search_db(
+        self, search_option, doc_name=None, subcollection_name=None, field_input=None
+    ):
         """
         Gọi các hàm search (by_collection, by_field) từ search_db_service
         """
-        search_service = search_db_service(self.db, collection_input, field_input)
+        search_service = search_db_service(self.db, self.collection, field_input)
         result = None
         if search_option == "by_collection":
-            result = search_service.search_by_collection()
+            # Nếu doc_name là None thì truyền chuỗi rỗng để tránh lỗi type
+            doc_name = doc_name or ""
+            result = search_service.search_by_collection(doc_name)
         elif search_option == "by_field":
-            result = search_service.search_by_field()
+            if doc_name is None or subcollection_name is None:
+                raise ValueError(
+                    "doc_name và subcollection_name là bắt buộc cho by_field"
+                )
+            result = search_service.search_by_field(doc_name, subcollection_name)
         return result
 
     # def update_db(self, collection_input, data_old, data_new):
